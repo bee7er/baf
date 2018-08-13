@@ -1,0 +1,5 @@
+/.idea
+/.DS*
+wp-config.php
+/wp-content/bafdev/config/config.php
+

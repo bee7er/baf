@@ -1,0 +1,65 @@
+/*
+ * PB One: http://photoboxone.com/
+ */
+
+.clearfix:before,
+.clearfix:after{
+	display: block;
+	content: '';
+	clear: both;
+	height: 0;
+	overflow: hidden
+}
+
+.offline_box_settings{
+	display: block
+}
+	.offline_box_settings img{
+		max-width: 100%;
+	}
+	.offline_box_settings em,
+	.offline_box_settings i{
+		font-style: italic;
+	}
+	.offline_box_settings strong,
+	.offline_box_settings b{
+		font-weight: bold;
+	}
+
+.offline_box_links{
+	padding-bottom: 10px;
+	min-height: 10px;
+	height: 10px;
+	height: auto !important;	
+}
+	.offline_box_links li{
+		display:block;
+		float:left;
+		padding-right: 15px;
+		line-height: 20px
+	}
+		.offline_box_links li img{
+			vertical-align: middle;
+		}
+		.offline_box_links li strong{
+			font-weight: normal;
+		}
+		.offline_box_links li em{
+			font-style: none;
+		}
+.inline-block{
+	display: inline-block;
+}
+.inline-table{
+	display: inline-table;
+}
+.display-table{
+	display: table;
+}
+.table-cell{
+	display: table-cell;
+}
+.transition{
+	-webkit-transition: all .4s;
+	transition: all .4s;
+}

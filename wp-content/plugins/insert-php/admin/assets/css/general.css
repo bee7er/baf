@@ -1,0 +1,12 @@
+/**
+ * General styles for snippets post types
+ * @author Webcraftic <wordpress.webraftic@gmail.com>
+ * @copyright Webcraftic 28.05.2018
+ */
+.CodeMirror {
+  border: 1px solid #dad8d8;
+}
+.misc-pub-post-status,
+.misc-pub-visibility {
+  display: none;
+}

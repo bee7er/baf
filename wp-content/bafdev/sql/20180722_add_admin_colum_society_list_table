@@ -1,0 +1,6 @@
+
+--
+-- Add admin column to table `society_list`
+--
+
+ALTER TABLE society_list ADD `society-admin-username` VARCHAR(255) NULL AFTER `society-name`;

@@ -1,0 +1,142 @@
+/*
+	Theme Name: 	Hemingway
+	Theme URI:		http://www.andersnoren.se/teman/hemingway-wordpress-theme/
+	Description:	Hemingway Child Theme
+	Author:			Brian Etheridge
+	Template:		hemingway
+	Version:		1.0.0
+	License:		GNU General Public License v2 or later
+	License URI:	http://www.gnu.org/licenses/gpl-2.0.html
+	Tags:			blog, two-columns, right-sidebar, custom-colors, custom-header, custom-menu, editor-style
+    Text Domain:	hemingway-child
+*/
+
+/*
+You can add your own CSS here.
+
+Click the help icon above to learn more.
+*/
+
+body {
+	font-family:Tahoma, Verdana, Arial, "sans-serif";
+	font-size: 14px;
+}
+
+/* NB Page title */
+.post-header {
+	margin: 0;
+	padding: 0;
+}
+.post-title {
+	display: none;
+}
+
+.post, .page, .widget {
+	border-bottom: 2px solid #CCC;
+}
+
+.header-inner {
+	text-align: left !important;
+}
+.blog-info {
+	background: none;
+}
+.blog-title a {
+	line-height: 100px;
+	margin-left: -50px;
+	color: #39f63c;
+	text-decoration: none;
+	font-family: Tahoma, "sans-serif";
+	font-size: 36px;
+	text-shadow: 4px 4px 4px #0d0d0d !important;
+	text-transform: lowercase;
+}
+
+.post-content hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ccc;
+	margin: 8px auto 24px auto;
+	padding: 0;
+}
+
+.post-content li {
+	margin-left: 25px;
+	line-height: 130%;
+	text-align:justify;
+}
+
+.post-content p {
+	margin-bottom: 1em;
+	line-height: 130%;
+	text-align:justify;
+}
+
+.post-content p.left-justify {
+	text-align:left;
+}
+
+.post-content h2.page-title {
+	text-align:left;
+}
+
+.post-content h3  {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	line-height: 100%;
+}
+
+.post-content h4 {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	line-height: 100%;
+}
+
+.post-content input[type="text"], .post-content input[type="tel"],
+.post-content input[type="url"],
+.post-content input[type="number"],
+.post-content input[type="email"], .post-content input[type="password"], .post-content textarea,
+.post-content select,
+.post-content input[type="submit"] {
+	font-size:16px;
+}
+
+.section.bg-dark {
+}
+
+a.scroll-to {
+	cursor: pointer;
+}
+
+a.top {
+	font-size: 16px;
+}
+
+.link-group {
+	margin: 0 0 20px 25px;
+}
+
+/* Hide post meta */
+.date-sep {display:none;}
+.post-author {display:none;}
+
+.button {
+	background-color: #0085ba;
+	border: none;
+	color: white;
+	padding: 10px 16px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
+.error {
+	font-weight:bold;
+	font-size:18px;
+	color:#c40000
+}
+/* Hide profile picture in forum */
+.avatar {
+	display: none;
+}

@@ -1,0 +1,69 @@
+		
+#maxgallery-2739.mg-image-tiles .mg-thumbs .caption-bottom-container {
+	position: absolute !important;
+	bottom: 0px !important;
+	left: 0px !important;
+	width: 100% !important;
+	border: none !important;
+	padding: 0px !important;
+}
+#maxgallery-2739.mg-image-tiles .mg-thumbs .caption.bottom {
+	padding: 2px 4px 2px 4px !important;
+	margin: 0px !important;
+	color: #ffffff !important;
+}
+#maxgallery-2739.mg-image-tiles .mg-thumbs .caption.below {
+	padding: 2px 4px 2px 4px !important;
+	margin: -10px 0px 10px 0px !important;
+}
+#maxgallery-2739.mg-image-tiles .mg-thumbs ul li div {
+	margin-top: 10px !important;
+	margin-bottom: 10px !important;
+	padding: 3% !important;
+}
+#maxgallery-2739.mg-image-tiles .mg-thumbs ul li div:hover {
+	box-shadow: 0px 0px 5px #808080 !important;
+	-moz-box-shadow: 0px 0px 5px #808080 !important;
+	-webkit-box-shadow: 0px 0px 5px #808080 !important;
+}
+
+button.mfp-close {
+    z-index: 1046;
+}
+
+.mfp-close {
+    font-size: 0;
+    height: 40px;
+    line-height: 44px;
+    opacity: 1.0;
+    position: absolute;
+    right: 0 !important;
+    text-align: center;
+    text-decoration: none;
+    top: 0;
+    width: 40px !important;
+}
+
+
+#maxgallery-2739.mg-image-tiles ul li a div img {
+  border: 1px solid !important;
+  border-radius: 0px !important;
+  border-color: #000000 !important;
+}
+button.mfp-close {
+  background: url("http://www.barnetallotments.org.uk/wp-content/plugins/maxgalleria/images/icons/close-style-0-wt.png")	no-repeat scroll center center transparent !important;
+}
+.mfp-arrow-left::before, .mfp-arrow-left .mfp-b,
+.mfp-arrow-right::before, .mfp-arrow-right .mfp-b {
+	border: 0 none;
+}
+.mfp-arrow-left::after, .mfp-arrow-left .mfp-a,
+.mfp-arrow-right::after, .mfp-arrow-right .mfp-a {
+	border: 0 none;	
+}
+button.mfp-arrow.mfp-arrow-left {
+  background: url("http://www.barnetallotments.org.uk/wp-content/plugins/maxgalleria/images/icons/arrow-style-0l-wt.png")	no-repeat scroll center center transparent !important;
+}
+button.mfp-arrow.mfp-arrow-right {
+  background: url("http://www.barnetallotments.org.uk/wp-content/plugins/maxgalleria/images/icons/arrow-style-0r-wt.png")	no-repeat scroll center center transparent !important;
+}
