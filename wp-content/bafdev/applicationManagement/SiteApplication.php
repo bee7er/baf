@@ -215,7 +215,7 @@ class SiteApplication
             <script type='application/javascript'>
                 function checkOther() {
                     jQuery('#otherRow').hide();
-                    if (jQuery('#how_hear').val() == 'Other') {
+                    if (jQuery('#how_hear').val() === 'Other') {
                         jQuery('#otherRow').show();
                     }
                  }
