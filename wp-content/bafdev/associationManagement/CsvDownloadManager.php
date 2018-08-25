@@ -38,6 +38,17 @@ class CsvDownloadManager
     }
 
     /**
+     * Validate form details
+     *
+     * @param $data
+     * @return array
+     */
+    public function t($field)
+    {
+        return "IF ($field IS NULL OR $field = '', '', $field)";
+    }
+
+    /**
      * Extract and download society data
      *
      * @param $postData
@@ -46,17 +57,17 @@ class CsvDownloadManager
     public function extractSocietyData($postData)
     {
         $selectFieldSet = [
-            'includeChair' => ['`chair`',$this->c('`chair-email`') . " as 'chair-email'"],
-            'includeSecretary' => ['`secretary`',$this->c('`secretary-email`') . " as 'secretary-email'"],
-            'includeTreasurer' => ['`treasurer`',$this->c('`treasurer-email`') . " as 'treasurer-email'"],
-            'includeSocietyRep' => ['`society-rep`',$this->c('`society-rep-email`') . " as 'society-rep-email'"],
+            'includeChair' => ['`chair`',$this->c('`chair-email`') . " as 'chair-email'",$this->t('`chair-telephone`') . " as 'chair-telephone'"],
+            'includeSecretary' => ['`secretary`',$this->c('`secretary-email`') . " as 'secretary-email'",$this->t('`secretary-telephone`') . " as 'secretary-telephone'"],
+            'includeTreasurer' => ['`treasurer`',$this->c('`treasurer-email`') . " as 'treasurer-email'",$this->t('`treasurer-telephone`') . " as 'treasurer-telephone'"],
+            'includeSocietyRep' => ['`society-rep`',$this->c('`society-rep-email`') . " as 'society-rep-email'",$this->t('`society-rep-telephone`') . " as 'society-rep-telephone'"],
         ];
 
         $headerFieldSet = [
-            'includeChair' => ['chair', "chair email"],
-            'includeSecretary' => ['secretary', "secretary email"],
-            'includeTreasurer' => ['treasurer', "treasurer email"],
-            'includeSocietyRep' => ['society-rep', "society rep email"],
+            'includeChair' => ['chair', "chair email", "chair telephone"],
+            'includeSecretary' => ['secretary', "secretary email", "secretary telephone"],
+            'includeTreasurer' => ['treasurer', "treasurer email", "treasurer telephone"],
+            'includeSocietyRep' => ['society-rep', "society rep email", "society rep telephone"],
         ];
 
         $postedFields = array_keys($postData);
