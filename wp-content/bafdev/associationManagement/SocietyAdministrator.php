@@ -233,7 +233,7 @@ class SocietyAdministrator extends Administrator
                 $html .= '<tr>';
                 $html .= ('<td>' .
                     '<a href="' . APP_DIR . '/allotment-society-finder-details/?society_id='
-                        . $society['id'] . '">' . $society['society-name'] . '</a></td>');
+                    . $society['id'] . '">' . $society['society-name'] . '</a></td>');
                 $html .= '</tr>';
             }
         }
