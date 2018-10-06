@@ -13,13 +13,13 @@
 	if( !defined('ABSPATH') ) {
 		exit;
 	}
-	if( !class_exists('Wbcr_Factory401_AssetsList') ) {
+	if( !class_exists('Wbcr_Factory404_AssetsList') ) {
 		/**
 		 * Assets List
 		 *
 		 * @since 1.0.0
 		 */
-		class Wbcr_Factory401_AssetsList {
+		class Wbcr_Factory404_AssetsList {
 
 			protected $all = array();
 			public $header_place = array();
@@ -29,15 +29,15 @@
 			protected $default_place;
 
 			/**
-			 * @var Wbcr_Factory401_Plugin
+			 * @var Wbcr_Factory404_Plugin
 			 */
 			protected $plugin;
 
 			/**
-			 * @param Wbcr_Factory401_Plugin $plugin
+			 * @param Wbcr_Factory404_Plugin $plugin
 			 * @param bool $defaultIsFooter
 			 */
-			public function __construct(Wbcr_Factory401_Plugin $plugin, $defaultIsFooter = true)
+			public function __construct(Wbcr_Factory404_Plugin $plugin, $defaultIsFooter = true)
 			{
 				$this->plugin = $plugin;
 

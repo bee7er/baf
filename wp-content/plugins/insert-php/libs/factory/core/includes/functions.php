@@ -14,33 +14,33 @@
 		exit;
 	}
 	
-	if( function_exists('wbcr_factory_401_set_lazy_redirect') ) {
+	if( function_exists('wbcr_factory_404_set_lazy_redirect') ) {
 		/**
 		 * Sets a lazy redirect.
 		 *
 		 * @since 3.0.6
 		 * @return void
 		 */
-		function wbcr_factory_401_set_lazy_redirect($url)
+		function wbcr_factory_404_set_lazy_redirect($url)
 		{
-			update_option('wbcr_factory_401_lazy_redirect', $url);
+			update_option('wbcr_factory_404_lazy_redirect', $url);
 		}
 	}
 	
-	if( function_exists('wbcr_factory_401_do_lazy_redirect') ) {
-		function wbcr_factory_401_do_lazy_redirect()
+	if( function_exists('wbcr_factory_404_do_lazy_redirect') ) {
+		function wbcr_factory_404_do_lazy_redirect()
 		{
-			$url = get_option('wbcr_factory_401_lazy_redirect', null);
+			$url = get_option('wbcr_factory_404_lazy_redirect', null);
 			
 			if( empty($url) ) {
 				return;
 			}
 			
-			delete_option('wbcr_factory_401_lazy_redirect');
+			delete_option('wbcr_factory_404_lazy_redirect');
 			wp_redirect($url);
 		}
 		
-		add_action('admin_init', 'wbcr_factory_401_do_lazy_redirect');
+		add_action('admin_init', 'wbcr_factory_404_do_lazy_redirect');
 	}
 	
 	/**
@@ -54,7 +54,7 @@
 	 *
 	 * @since 1.0.0
 	 *
-	 * @see wbcr_factory_401_deprecated_hook()
+	 * @see wbcr_factory_404_deprecated_hook()
 	 *
 	 * @param string $tag The name of the filter hook.
 	 * @param array $args Array of additional function arguments to be passed to apply_filters().
@@ -64,7 +64,7 @@
 	 *
 	 * @return mixed
 	 */
-	function wbcr_factory_401_apply_filters_deprecated($tag, $args, $version, $replacement = false, $message = null)
+	function wbcr_factory_404_apply_filters_deprecated($tag, $args, $version, $replacement = false, $message = null)
 	{
 		if( function_exists('apply_filters_deprecated') ) {
 			return apply_filters_deprecated($tag, $args, $version, $replacement, $message);
@@ -72,7 +72,7 @@
 		if( !has_filter($tag) ) {
 			return $args[0];
 		}
-		wbcr_factory_401_deprecated_hook($tag, $version, $replacement, $message);
+		wbcr_factory_404_deprecated_hook($tag, $version, $replacement, $message);
 		
 		return apply_filters_ref_array($tag, $args);
 	}
@@ -98,7 +98,7 @@
 	 *
 	 * @return void
 	 */
-	function wbcr_factory_401_do_action_deprecated($tag, $args, $version, $replacement = false, $message = null)
+	function wbcr_factory_404_do_action_deprecated($tag, $args, $version, $replacement = false, $message = null)
 	{
 		if( function_exists('do_action_deprecated') ) {
 			do_action_deprecated($tag, $args, $version, $replacement, $message);
@@ -108,14 +108,14 @@
 		if( !has_action($tag) ) {
 			return;
 		}
-		wbcr_factory_401_deprecated_hook($tag, $version, $replacement, $message);
+		wbcr_factory_404_deprecated_hook($tag, $version, $replacement, $message);
 		do_action_ref_array($tag, $args);
 	}
 	
 	/**
 	 * Marks a deprecated action or filter hook as deprecated and throws a notice.
 	 *
-	 * Use the 'wbcr_factory_401_deprecated_hook_run' action to get the backtrace describing where the
+	 * Use the 'wbcr_factory_404_deprecated_hook_run' action to get the backtrace describing where the
 	 * deprecated hook was called.
 	 *
 	 * Default behavior is to trigger a user error if WP_DEBUG is true.
@@ -133,7 +133,7 @@
 	 * @param string $replacement Optional. The hook that should have been used.
 	 * @param string $message Optional. A message regarding the change.
 	 */
-	function wbcr_factory_401_deprecated_hook($hook, $version, $replacement = null, $message = null)
+	function wbcr_factory_404_deprecated_hook($hook, $version, $replacement = null, $message = null)
 	{
 		/**
 		 * Fires when a deprecated hook is called.

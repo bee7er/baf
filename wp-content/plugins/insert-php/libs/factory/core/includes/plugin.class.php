@@ -14,9 +14,9 @@
 		exit;
 	}
 	
-	if( !class_exists('Wbcr_Factory401_Plugin') ) {
+	if( !class_exists('Wbcr_Factory404_Plugin') ) {
 		
-		abstract class Wbcr_Factory401_Plugin extends Wbcr_Factory401_Base {
+		abstract class Wbcr_Factory404_Plugin extends Wbcr_Factory404_Base {
 
 			/**
 			 * Is a current page one of the admin pages?
@@ -29,14 +29,14 @@
 			/**
 			 * The Bootstrap Manager class.n.
 			 *
-			 * @var Wbcr_FactoryBootstrap401_Manager
+			 * @var Wbcr_FactoryBootstrap404_Manager
 			 */
 			public $bootstrap;
 
 			/**
 			 * The Bootstrap Manager class.n.
 			 *
-			 * @var Wbcr_FactoryForms402_Manager
+			 * @var Wbcr_FactoryForms405_Manager
 			 */
 			public $forms;
 
@@ -98,7 +98,7 @@
 			protected $updates;
 
 			/**
-			 * @var array[] Wbcr_Factory401_Plugin
+			 * @var array[] Wbcr_Factory404_Plugin
 			 */
 			private $plugin_addons;
 
@@ -219,17 +219,17 @@
 			}
 
 			/**
-			 * @param Wbcr_FactoryBootstrap401_Manager $bootstrap
+			 * @param Wbcr_FactoryBootstrap404_Manager $bootstrap
 			 */
-			public function setBootstap(Wbcr_FactoryBootstrap401_Manager $bootstrap)
+			public function setBootstap(Wbcr_FactoryBootstrap404_Manager $bootstrap)
 			{
 				$this->bootstrap = $bootstrap;
 			}
 
 			/**
-			 * @param Wbcr_FactoryForms402_Manager $forms
+			 * @param Wbcr_FactoryForms405_Manager $forms
 			 */
-			public function setForms(Wbcr_FactoryForms402_Manager $forms)
+			public function setForms(Wbcr_FactoryForms405_Manager $forms)
 			{
 				$this->forms = $forms;
 			}
@@ -251,11 +251,11 @@
 					throw new Exception('A class with this name {' . $class_name . '} does not exist.');
 				}
 
-				if( !class_exists('Wbcr_FactoryPages402') ) {
-					throw new Exception('The factory_pages_402 module is not included.');
+				if( !class_exists('Wbcr_FactoryPages405') ) {
+					throw new Exception('The factory_pages_405 module is not included.');
 				}
 
-				Wbcr_FactoryPages402::register($this, $class_name);
+				Wbcr_FactoryPages405::register($this, $class_name);
 			}
 
 			/**
@@ -275,11 +275,11 @@
 					throw new Exception('A class with this name {' . $class_name . '} does not exist.');
 				}
 
-				if( !class_exists('Wbcr_FactoryTypes401') ) {
-					throw new Exception('The factory_types_401 module is not included.');
+				if( !class_exists('Wbcr_FactoryTypes404') ) {
+					throw new Exception('The factory_types_404 module is not included.');
 				}
 
-				Wbcr_FactoryTypes401::register($class_name, $this);
+				Wbcr_FactoryTypes404::register($class_name, $this);
 			}
 
 			/**
@@ -295,7 +295,7 @@
 					$this->loadModule($module);
 				}
 				
-				do_action('wbcr_factory_401_core_modules_loaded-' . $this->plugin_name);
+				do_action('wbcr_factory_404_core_modules_loaded-' . $this->plugin_name);
 			}
 
 			/**
@@ -348,7 +348,7 @@
 			 *
 			 * @since 3.2.0
 			 * @param array $module - массив с информацией о загружаемом модуле,
-			 * пример array('libs/factory/bootstrap', 'factory_bootstrap_401', 'admin'),
+			 * пример array('libs/factory/bootstrap', 'factory_bootstrap_404', 'admin'),
 			 * $module[0] - относительный путь к директории модуля
 			 * $module[1] - идентификатор модуля с префиксом 000
 			 * $module[2] - область применения,
@@ -397,7 +397,7 @@
 
 				if( $this->is_admin ) {
 					add_action('admin_init', array($this, 'customizePluginRow'), 20);
-					/*add_action('wbcr_factory_401_core_modules_loaded-' . $this->plugin_name, array(
+					/*add_action('wbcr_factory_404_core_modules_loaded-' . $this->plugin_name, array(
 						$this,
 						'modulesLoaded'
 					));*/
@@ -501,7 +501,7 @@
 			{
 				
 				$db_version = $this->getPluginVersionFromDatabase();
-				do_action('wbcr_factory_401_plugin_activation_or_update_' . $this->plugin_name, $force_activation, $db_version, $this);
+				do_action('wbcr_factory_404_plugin_activation_or_update_' . $this->plugin_name, $force_activation, $db_version, $this);
 				
 				// there are not any previous version of the plugin in the past
 				if( !$db_version ) {
@@ -550,7 +550,7 @@
 			 */
 			public function activationHook()
 			{
-				$cancelled = apply_filters('wbcr_factory_401_cancel_plugin_activation_' . $this->plugin_name, false);
+				$cancelled = apply_filters('wbcr_factory_404_cancel_plugin_activation_' . $this->plugin_name, false);
 
 				if( $cancelled ) {
 					return;
@@ -563,14 +563,14 @@
 					}
 				}
 				
-				do_action('wbcr_factory_401_plugin_activation', $this);
-				do_action('wbcr_factory_401_plugin_activation_' . $this->plugin_name, $this);
+				do_action('wbcr_factory_404_plugin_activation', $this);
+				do_action('wbcr_factory_404_plugin_activation_' . $this->plugin_name, $this);
 				
 				// just time to know when the plugin was activated the first time
-				$activated = $this->getOption('factory_401_plugin_activated_' . $this->plugin_name, 0);
+				$activated = $this->getOption('factory_404_plugin_activated_' . $this->plugin_name, 0);
 				
 				if( !$activated ) {
-					$this->updateOption('factory_401_plugin_activated_' . $this->plugin_name, time());
+					$this->updateOption('factory_404_plugin_activated_' . $this->plugin_name, time());
 				}
 			}
 			
@@ -582,14 +582,14 @@
 			 */
 			public function deactivationHook()
 			{
-				$cancelled = apply_filters('wbcr_factory_401_cancel_plugin_deactivation_' . $this->plugin_name, false);
+				$cancelled = apply_filters('wbcr_factory_404_cancel_plugin_deactivation_' . $this->plugin_name, false);
 				
 				if( $cancelled ) {
 					return;
 				}
 				
-				do_action('wbcr_factory_401_plugin_deactivation', $this);
-				do_action('wbcr_factory_401_plugin_deactivation_' . $this->plugin_name, $this);
+				do_action('wbcr_factory_404_plugin_deactivation', $this);
+				do_action('wbcr_factory_404_plugin_deactivation_' . $this->plugin_name, $this);
 				
 				if( !empty($this->activator_class) ) {
 					foreach((array)$this->activator_class as $activator_class) {
@@ -669,10 +669,10 @@
 				}
 				
 				// just time to know when the plugin was activated the first time
-				$activated = $this->getOption('factory_401_plugin_activated_' . $this->plugin_name, 0);
+				$activated = $this->getOption('factory_404_plugin_activated_' . $this->plugin_name, 0);
 
 				if( !$activated ) {
-					$this->updateOption('factory_401_plugin_activated_' . $this->plugin_name, time());
+					$this->updateOption('factory_404_plugin_activated_' . $this->plugin_name, time());
 				}
 			}
 			
@@ -725,7 +725,7 @@
 					return;
 				}
 				
-				$messages = apply_filters('wbcr_factory_401_plugin_row_' . $this->plugin_name, array(), $file, $plugin_data);
+				$messages = apply_filters('wbcr_factory_404_plugin_row_' . $this->plugin_name, array(), $file, $plugin_data);
 				
 				// if nothign to show then, use default handle
 				/*if( count($messages) == 0 ) {
@@ -855,12 +855,12 @@
 			
 			public function newScriptList()
 			{
-				return new Wbcr_Factory401_ScriptList($this);
+				return new Wbcr_Factory404_ScriptList($this);
 			}
 			
 			public function newStyleList()
 			{
-				return new Wbcr_Factory401_StyleList($this);
+				return new Wbcr_Factory404_StyleList($this);
 			}
 		}
 	}

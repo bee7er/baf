@@ -19,17 +19,17 @@
 		return;
 	}
 
-	if( defined('FACTORY_METABOXES_400_LOADED') ) {
+	if( defined('FACTORY_METABOXES_403_LOADED') ) {
 		return;
 	}
-	define('FACTORY_METABOXES_400_LOADED', true);
+	define('FACTORY_METABOXES_403_LOADED', true);
 
-	define('FACTORY_METABOXES_400_DIR', dirname(__FILE__));
-	define('FACTORY_METABOXES_400_URL', plugins_url(null, __FILE__));
+	define('FACTORY_METABOXES_403_DIR', dirname(__FILE__));
+	define('FACTORY_METABOXES_403_URL', plugins_url(null, __FILE__));
 
 	#comp merge
-	require(FACTORY_METABOXES_400_DIR . '/metaboxes.php');
-	require(FACTORY_METABOXES_400_DIR . '/metabox.class.php');
-	require(FACTORY_METABOXES_400_DIR . '/includes/form-metabox.class.php');
-	require(FACTORY_METABOXES_400_DIR . '/includes/publish-metabox.class.php');
+	require(FACTORY_METABOXES_403_DIR . '/metaboxes.php');
+	require(FACTORY_METABOXES_403_DIR . '/metabox.class.php');
+	require(FACTORY_METABOXES_403_DIR . '/includes/form-metabox.class.php');
+	require(FACTORY_METABOXES_403_DIR . '/includes/publish-metabox.class.php');
 	#endcomp

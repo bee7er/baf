@@ -4,8 +4,8 @@
 		exit;
 	}
 	
-	if( !class_exists('Wbcr_Factory401_Base') ) {
-		class  Wbcr_Factory401_Base {
+	if( !class_exists('Wbcr_Factory404_Base') ) {
+		class  Wbcr_Factory404_Base {
 			
 			/**
 			 * Буферизуем опции плагинов в этот атрибут, для быстрого доступа
@@ -22,9 +22,9 @@
 			protected $prefix;
 			
 			/**
-			 * Экзамеляр класса Wbcr_Factory401_Request, необходим управляет http запросами
+			 * Экзамеляр класса Wbcr_Factory404_Request, необходим управляет http запросами
 			 *
-			 * @var Wbcr_Factory401_Request
+			 * @var Wbcr_Factory404_Request
 			 */
 			public $request;
 			
@@ -38,7 +38,7 @@
 					throw new Exception('Не передан один из обязательных атрибутов (prefix) или атрибует не соотвествует типу данных string.');
 				}
 				
-				$this->request = new Wbcr_Factory401_Request();
+				$this->request = new Wbcr_Factory404_Request();
 
 				if( !isset(self::$_opt_buffer[$this->prefix]) ) {
 					$cache_options = get_option($this->prefix . 'cache_options', array());

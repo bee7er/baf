@@ -13,10 +13,10 @@
 
 	if( !class_exists('WINP_Plugin') ) {
 
-		class WINP_Plugin extends Wbcr_Factory401_Plugin {
+		class WINP_Plugin extends Wbcr_Factory404_Plugin {
 
 			/**
-			 * @var Wbcr_Factory401_Plugin
+			 * @var Wbcr_Factory404_Plugin
 			 */
 			private static $app;
 
@@ -42,7 +42,7 @@
 			}
 
 			/**
-			 * @return Wbcr_Factory401_Plugin
+			 * @return WINP_Plugin
 			 */
 			public static function app()
 			{
@@ -67,31 +67,37 @@
 			{
 
 				$this->load(array(
-					array('libs/factory/bootstrap', 'factory_bootstrap_401', 'admin'),
-					array('libs/factory/forms', 'factory_forms_402', 'admin'),
-					array('libs/factory/pages', 'factory_pages_402', 'admin'),
-					array('libs/factory/types', 'factory_types_401'),
-					array('libs/factory/metaboxes', 'factory_metaboxes_400', 'admin'),
-					array('libs/factory/viewtables', 'factory_viewtables_401', 'admin'),
-					array('libs/factory/shortcodes', 'factory_shortcodes_321', 'all'),
-					array('libs/factory/notices', 'factory_notices_401', 'admin')
+					array('libs/factory/bootstrap', 'factory_bootstrap_404', 'admin'),
+					array('libs/factory/forms', 'factory_forms_405', 'admin'),
+					array('libs/factory/pages', 'factory_pages_405', 'admin'),
+					array('libs/factory/types', 'factory_types_404'),
+					array('libs/factory/taxonomies', 'factory_taxonomies_324'),
+					array('libs/factory/metaboxes', 'factory_metaboxes_403', 'admin'),
+					array('libs/factory/viewtables', 'factory_viewtables_403', 'admin'),
+					array('libs/factory/shortcodes', 'factory_shortcodes_324', 'all'),
+					array('libs/factory/notices', 'factory_notices_403', 'admin'),
+
 				));
 			}
 
 			private function registerPages()
 			{
+				$this->registerPage('WINP_ExportPage', WINP_PLUGIN_DIR . '/admin/pages/export.php');
 				$this->registerPage('WINP_SettingsPage', WINP_PLUGIN_DIR . '/admin/pages/settings.php');
 			}
 
 			private function registerTypes()
 			{
 				$this->registerType('WSC_TasksItemType', WINP_PLUGIN_DIR . '/admin/types/snippets-post-types.php');
+
+				require_once(WINP_PLUGIN_DIR . '/admin/types/snippets-taxonomy.php');
+				Wbcr_FactoryTaxonomies324::register('WINP_SnippetsTaxonomy', $this);
 			}
 
 			private function registerShortcodes()
 			{
 				require_once(WINP_PLUGIN_DIR . '/includes/shortcodes.php');
-				Wbcr_FactoryShortcodes321::register('WINP_SnippetShortcode', $this);
+				Wbcr_FactoryShortcodes324::register('WINP_SnippetShortcode', $this);
 			}
 
 			private function adminScripts()
@@ -182,6 +188,36 @@
 				}
 
 				return $result;
+			}
+
+			/**
+			 * Retrieve the first error in a snippet's code
+			 *
+			 * @param int $snippet_id
+			 *
+			 * @return array|bool
+			 */
+			public function getSnippetError($snippet_id)
+			{
+				if( !intval($snippet_id) ) {
+					return false;
+				}
+
+				$snippet_code = WINP_Helper::getMetaOption($snippet_id, 'snippet_code');
+
+				$result = $this->executeSnippet($snippet_code, $snippet_id);
+
+				if( false !== $result ) {
+					return false;
+				}
+
+				$error = error_get_last();
+
+				if( is_null($error) ) {
+					return false;
+				}
+
+				return $error;
 			}
 		}
 	}

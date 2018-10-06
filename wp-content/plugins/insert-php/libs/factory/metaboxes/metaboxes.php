@@ -15,11 +15,11 @@
 		exit;
 	}
 
-	if( !class_exists('Wbcr_FactoryMetaboxes400') ) {
+	if( !class_exists('Wbcr_FactoryMetaboxes403') ) {
 
-		add_action('add_meta_boxes', 'Wbcr_FactoryMetaboxes400::actionAddMetaboxes');
-		add_action('admin_enqueue_scripts', 'Wbcr_FactoryMetaboxes400::actionAdminEnqueueScripts');
-		add_action('save_post', 'Wbcr_FactoryMetaboxes400::actionSavePost');
+		add_action('add_meta_boxes', 'Wbcr_FactoryMetaboxes403::actionAddMetaboxes');
+		add_action('admin_enqueue_scripts', 'Wbcr_FactoryMetaboxes403::actionAdminEnqueueScripts');
+		add_action('save_post', 'Wbcr_FactoryMetaboxes403::actionSavePost');
 
 		/**
 		 * A base class to manage metaboxes.
@@ -30,13 +30,13 @@
 		 *
 		 * @since 1.0.0
 		 */
-		class Wbcr_FactoryMetaboxes400 {
+		class Wbcr_FactoryMetaboxes403 {
 
 			/**
 			 * A variable to store metaboxes per type they defined for.
 			 *
 			 * @since 1.0.0
-			 * @var Wbcr_FactoryMetaboxes400_Metabox[]
+			 * @var Wbcr_FactoryMetaboxes403_Metabox[]
 			 */
 			public static $metaboxes = array();
 
@@ -58,10 +58,10 @@
 			 *
 			 * @since 1.0.0
 			 * @param string|object $class_name_or_object
-			 * @param Wbcr_Factory401_Plugin $plugin
-			 * @return Wbcr_FactoryMetaboxes400_Metabox
+			 * @param Wbcr_Factory404_Plugin $plugin
+			 * @return Wbcr_FactoryMetaboxes403_Metabox
 			 */
-			public static function register($class_name_or_object, Wbcr_Factory401_Plugin $plugin)
+			public static function register($class_name_or_object, Wbcr_Factory404_Plugin $plugin)
 			{
 
 				if( is_string($class_name_or_object) ) {
@@ -97,7 +97,7 @@
 			 * @since 1.0.0
 			 * @param type $class_name_or_object A metabox class name.
 			 * @param string $post_type A post type for which a given metabox should be registered.
-			 * @return Wbcr_FactoryMetaboxes400_Metabox
+			 * @return Wbcr_FactoryMetaboxes403_Metabox
 			 */
 			public static function registerFor($class_name_or_object, $post_type, $plugin)
 			{

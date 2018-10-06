@@ -194,8 +194,8 @@ class SiteApplication
         $html .= '<tr><td colspan="2"><h4><strong>You can apply for a plot on up to 3 sites in Barnet.</strong></h4><h4>Please indicate your choices below:</h4></td></tr>';
 
         $html .= '<tr><td>Preferred allotment (please select one)</td><td>' . PageUtils::getAllotmentSelect($allotments, 'preferred_allotment', $postData['preferred_allotment']) . '</td></tr>';
-        $html .= '<tr><td>Alternative 1 (please select one)</td><td>' . PageUtils::getAllotmentSelect($allotments, 'first_alternate_allotment', $postData['first_alternate_allotment']) . '</td></tr>';
-        $html .= '<tr><td>Alternative 2 (please select one)</td><td>' . PageUtils::getAllotmentSelect($allotments, 'second_alternate_allotment', $postData['second_alternate_allotment']) . '</td></tr>';
+        $html .= '<tr><td>Alternative 1 (optional)</td><td>' . PageUtils::getAllotmentSelect($allotments, 'first_alternate_allotment', $postData['first_alternate_allotment'], 'Select alternative') . '</td></tr>';
+        $html .= '<tr><td>Alternative 2 (optional)</td><td>' . PageUtils::getAllotmentSelect($allotments, 'second_alternate_allotment', $postData['second_alternate_allotment'], 'Select alternative') . '</td></tr>';
 
         $html .= '<tr><td>Do you have any previous experience of gardening or allotments? If so please provide some detail:</td>';
         $html .= '    <td>' . PageUtils::textarea('previous_experience', $postData['previous_experience']) . '</td></tr>';

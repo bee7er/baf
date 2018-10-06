@@ -14,23 +14,23 @@
 		exit;
 	}
 
-	if( !class_exists('Wbcr_FactoryTypes401') ) {
+	if( !class_exists('Wbcr_FactoryTypes404') ) {
 
-		add_action('wbcr_factory_401_plugin_activation', 'Wbcr_FactoryTypes401::activationHook');
-		add_action('wbcr_factory_401_plugin_deactivation', 'Wbcr_FactoryTypes401::deactivationHook');
+		add_action('wbcr_factory_404_plugin_activation', 'Wbcr_FactoryTypes404::activationHook');
+		add_action('wbcr_factory_404_plugin_deactivation', 'Wbcr_FactoryTypes404::deactivationHook');
 
 		/**
 		 * A base class to manage types.
 		 *
 		 * @since 1.0.0
 		 */
-		class Wbcr_FactoryTypes401 {
+		class Wbcr_FactoryTypes404 {
 
 			/**
 			 * Registered custom types.
 			 *
 			 * @since 1.0.0
-			 * @var Wbcr_FactoryTypes401_Type[]
+			 * @var Wbcr_FactoryTypes404_Type[]
 			 */
 			private static $types = array();
 
@@ -41,9 +41,9 @@
 			 * will be setup on the plugin configuration.
 			 *
 			 * @param string $class_name
-			 * @param Wbcr_Factory401_Plugin $plugin
+			 * @param Wbcr_Factory404_Plugin $plugin
 			 */
-			public static function register($class_name, Wbcr_Factory401_Plugin $plugin = null)
+			public static function register($class_name, Wbcr_Factory404_Plugin $plugin = null)
 			{
 				$type = new $class_name($plugin);
 
@@ -61,10 +61,10 @@
 			 * A plugin activation hook.
 			 *
 			 * @since 1.0.0
-			 * @param Wbcr_Factory401_Plugin $plugin
+			 * @param Wbcr_Factory404_Plugin $plugin
 			 * @return void
 			 */
-			public static function activationHook(Wbcr_Factory401_Plugin $plugin)
+			public static function activationHook(Wbcr_Factory404_Plugin $plugin)
 			{
 				$plugin_name = $plugin->getPluginName();
 
@@ -96,10 +96,10 @@
 			 * A plugin deactivation hook.
 			 *
 			 * @since 1.0.0
-			 * @param Wbcr_Factory401_Plugin $plugin
+			 * @param Wbcr_Factory404_Plugin $plugin
 			 * @return void
 			 */
-			public static function deactivationHook(Wbcr_Factory401_Plugin $plugin)
+			public static function deactivationHook(Wbcr_Factory404_Plugin $plugin)
 			{
 
 				$plugin_name = $plugin->getPluginName();

@@ -5,21 +5,34 @@
 	 *
 	 * @since 1.0.0
 	 */
-	class WINP_SnippetShortcode extends Wbcr_FactoryShortcodes321_Shortcode {
+	class WINP_SnippetShortcode extends Wbcr_FactoryShortcodes324_Shortcode {
 		
 		public $shortcode_name = 'wbcr_php_snippet';
-		// -------------------------------------------------------------------------------------
-		// Includes assets
-		// -------------------------------------------------------------------------------------
-		
+
+		/**
+		 * Includes assets
+		 * @var bool
+		 */
 		public $assets_in_header = true;
 
-		// -------------------------------------------------------------------------------------
-		// Content render
-		// -------------------------------------------------------------------------------------
-		
+		/**
+		 * Content render
+		 *
+		 * @param array $attr
+		 * @param string $content
+		 */
 		public function html($attr, $content)
 		{
+			if( isset($attr['title']) ) {
+				unset($attr['title']);
+			}
+			
+			$attr = array_map('sanitize_title', $attr);
+
+			// Let users pass arbitrary variables, through shortcode attributes.
+			// @since 2.0.5
+			extract($attr, EXTR_SKIP);
+
 			$id = isset($attr['id'])
 				? (int)$attr['id']
 				: null;

@@ -19,14 +19,14 @@
 		return;
 	}
 
-	if( defined('FACTORY_NOTICES_401_LOADED') ) {
+	if( defined('FACTORY_NOTICES_403_LOADED') ) {
 		return;
 	}
-	define('FACTORY_NOTICES_401_LOADED', true);
+	define('FACTORY_NOTICES_403_LOADED', true);
 
-	define('FACTORY_NOTICES_401_DIR', dirname(__FILE__));
-	define('FACTORY_NOTICES_401_URL', plugins_url(null, __FILE__));
+	define('FACTORY_NOTICES_403_DIR', dirname(__FILE__));
+	define('FACTORY_NOTICES_403_URL', plugins_url(null, __FILE__));
 
 	#comp merge
-	require_once(FACTORY_NOTICES_401_DIR . '/notices.php');
+	require_once(FACTORY_NOTICES_403_DIR . '/notices.php');
 	#endcomp

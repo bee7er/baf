@@ -98,9 +98,13 @@ class PageUtils
      * @param $selectedAllotment
      * @return string
      */
-    public static function getAllotmentSelect($allotments, $controlName, $selectedAllotment)
+    public static function getAllotmentSelect($allotments, $controlName, $selectedAllotment, $optionalLabel = '')
     {
         $html = '<select name="' . $controlName . '" class="form-control">';
+        if ($optionalLabel) {
+            $html .= ('<option value="">' . $optionalLabel . '</option>');
+        }
+
         foreach ($allotments as $allotment) {
             $selected = '';
             if ($allotment['site-name'] == $selectedAllotment) {

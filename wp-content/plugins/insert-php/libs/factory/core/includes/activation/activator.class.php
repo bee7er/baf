@@ -13,21 +13,21 @@
 		exit;
 	}
 
-	if( !class_exists('Wbcr_Factory401_Activator') ) {
+	if( !class_exists('Wbcr_Factory404_Activator') ) {
 		/**
 		 * Plugin Activator
 		 *
 		 * @since 1.0.0
 		 */
-		abstract class Wbcr_Factory401_Activator {
+		abstract class Wbcr_Factory404_Activator {
 
 			/**
 			 * Curent plugin.
-			 * @var Wbcr_Factory401_Plugin
+			 * @var Wbcr_Factory404_Plugin
 			 */
 			public $plugin;
 
-			public function __construct(Wbcr_Factory401_Plugin $plugin)
+			public function __construct(Wbcr_Factory404_Plugin $plugin)
 			{
 				$this->plugin = $plugin;
 			}

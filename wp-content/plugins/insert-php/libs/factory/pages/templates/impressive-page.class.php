@@ -14,15 +14,15 @@
 		exit;
 	}
 	
-	if( !class_exists('Wbcr_FactoryPages402_ImpressiveThemplate') ) {
+	if( !class_exists('Wbcr_FactoryPages405_ImpressiveThemplate') ) {
 		/**
-		 * Class Wbcr_FactoryPages402_ImpressiveThemplate
+		 * Class Wbcr_FactoryPages405_ImpressiveThemplate
 		 *
 		 * @method string getInfoWidget() - get widget content information
 		 * @method string getRatingWidget(array $args = array()) - get widget content rating
 		 * @method string getDonateWidget() - get widget content donate
 		 */
-		abstract class Wbcr_FactoryPages402_ImpressiveThemplate extends Wbcr_FactoryPages402_AdminPage {
+		abstract class Wbcr_FactoryPages405_ImpressiveThemplate extends Wbcr_FactoryPages405_AdminPage {
 			
 			//public $menu_target = 'options-general.php';
 			
@@ -67,12 +67,13 @@
 			public $show_bottom_sidebar = true;
 			
 			/**
-			 * @param Wbcr_Factory401_Plugin $plugin
+			 * @param Wbcr_Factory404_Plugin $plugin
 			 */
-			public function __construct(Wbcr_Factory401_Plugin $plugin)
+			public function __construct(Wbcr_Factory404_Plugin $plugin)
 			{
-				$this->menuIcon = FACTORY_PAGES_402_URL . '/templates/assets/img/webcraftic-plugin-icon.png';
-				
+				$this->menuIcon = FACTORY_PAGES_405_URL . '/templates/assets/img/webcraftic-plugin-icon.png';
+				$this->plugin = $plugin;
+
 				parent::__construct($plugin);
 				
 				global $factory_impressive_page_menu;
@@ -81,20 +82,21 @@
 					? ' ' . $this->page_menu_dashicon
 					: '';
 				
-				$this->title_plugin_action_link = __('Settings', 'wbcr_factory_pages_402');
+				$this->title_plugin_action_link = __('Settings', 'wbcr_factory_pages_405');
 				
 				//if( $this->type == 'options' ) {
 				//$this->show_right_sidebar_in_options = true;
 				//$this->show_bottom_sidebar = false;
 				//}
 				
-				$factory_impressive_page_menu[$plugin->getPluginName()][$this->getResultId()] = array(
+				$factory_impressive_page_menu[$this->getMenuScope()][$this->getResultId()] = array(
 					'type' => $this->type, // page, options
 					'url' => $this->getBaseUrl(),
 					'title' => '<span class="dashicons' . $dashicon . '"></span> ' . $this->getMenuTitle(),
 					'position' => $this->page_menu_position,
 					'parent' => $this->page_parent_page
 				);
+
 			}
 			
 			public function __call($name, $arguments)
@@ -118,7 +120,7 @@
 			/**
 			 * Requests assets (js and css) for the page.
 			 *
-			 * @see FactoryPages402_AdminPage
+			 * @see FactoryPages405_AdminPage
 			 *
 			 * @since 1.0.0
 			 * @return void
@@ -142,8 +144,15 @@
 					'control.checkbox'
 				), 'bootstrap');
 				
-				$this->styles->add(FACTORY_PAGES_402_URL . '/templates/assets/css/impressive.page.template.css');
+				$this->styles->add(FACTORY_PAGES_405_URL . '/templates/assets/css/impressive.page.template.css');
 				//$this->styles->add('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+			}
+
+			/**
+			 * @return string
+			 */
+			public function getMenuScope() {
+				return $this->plugin->getPluginName();
 			}
 			
 			/**
@@ -241,19 +250,19 @@
 					$GLOBALS['wp_fastest_cache']->deleteCache();
 				}
 
-				wbcr_factory_401_do_action_deprecated('wbcr_factory_401_imppage_flush_cache', array(
+				wbcr_factory_404_do_action_deprecated('wbcr_factory_404_imppage_flush_cache', array(
 					$this->plugin->getPluginName(),
 					$this->getResultId()
-				), '4.0.1', 'wbcr_factory_401_imppage_after_form_save');
+				), '4.0.1', 'wbcr_factory_404_imppage_after_form_save');
 
 				/**
 				 * @since 4.0.1
 				 */
-				do_action('wbcr_factory_401_imppage_after_form_save', $this->plugin, $this);
+				do_action('wbcr_factory_404_imppage_after_form_save', $this->plugin, $this);
 
 				$this->afterFormSave();
 
-				$this->redirectToAction('index', apply_filters('wbcr_factory_401_imppage_after_form_save_redirect_args', array(
+				$this->redirectToAction('index', apply_filters('wbcr_factory_404_imppage_after_form_save_redirect_args', array(
 					$this->plugin->getPluginName() . '_saved' => 1
 				)));
 			}
@@ -265,7 +274,7 @@
 			protected function warningNotice()
 			{
 				/*if( WP_CACHE ) {
-					$this->printWarningNotice(__("It seems that a caching/performance plugin is active on this site. Please manually invalidate that plugin's cache after making any changes to the settings below.", 'wbcr_factory_pages_402'));
+					$this->printWarningNotice(__("It seems that a caching/performance plugin is active on this site. Please manually invalidate that plugin's cache after making any changes to the settings below.", 'wbcr_factory_pages_405'));
 				}*/
 				// Метод предназначен для вызова в дочернем классе
 			}
@@ -339,7 +348,7 @@
 				/**
 				 * @since 4.0.1
 				 */
-				do_action('wbcr_factory_pages_402_imppage_print_all_notices', $this->plugin, $this);
+				do_action('wbcr_factory_pages_405_imppage_print_all_notices', $this->plugin, $this);
 			}
 
 			private function showActionsNotice()
@@ -350,13 +359,13 @@
 							$this->plugin->getPluginName() . '_saved' => '1'
 						),
 						'type' => 'success',
-						'message' => __('The settings have been updated successfully!', 'wbcr_factory_pages_402') . (WP_CACHE
-								? '<br>' . __("It seems that a caching/performance plugin is active on this site. Please manually invalidate that plugin's cache after making any changes to the settings below.", 'wbcr_factory_pages_402')
+						'message' => __('The settings have been updated successfully!', 'wbcr_factory_pages_405') . (WP_CACHE
+								? '<br>' . __("It seems that a caching/performance plugin is active on this site. Please manually invalidate that plugin's cache after making any changes to the settings below.", 'wbcr_factory_pages_405')
 								: '')
 					)
 				);
 				
-				$notices = apply_filters('wbcr_factory_pages_402_imppage_actions_notice', $notices, $this->plugin, $this->id);
+				$notices = apply_filters('wbcr_factory_pages_405_imppage_actions_notice', $notices, $this->plugin, $this->id);
 				$notices = $this->getActionNotices($notices);
 				
 				foreach($notices as $key => $notice) {
@@ -519,7 +528,7 @@
 					<?php endif; ?>
 					<?php if( $this->type == 'options' ): ?>
 						<div class="wbcr-factory-control">
-						<input name="<?= $this->plugin->getPluginName() ?>_save_action" class="wbcr-factory-type-save" type="submit" value="<?php _e('Save settings', 'wbcr_factory_pages_402'); ?>">
+						<input name="<?= $this->plugin->getPluginName() ?>_save_action" class="wbcr-factory-type-save" type="submit" value="<?php _e('Save settings', 'wbcr_factory_pages_405'); ?>">
 						<?php wp_nonce_field('wbcr_factory_' . $this->getResultId() . '_save_action'); ?>
 						</div><?php endif; ?>
 				</div>
@@ -560,25 +569,25 @@
 
 			protected function getPageWidgets($position = 'bottom')
 			{
-				wbcr_factory_401_apply_filters_deprecated('wbcr_factory_pages_402_imppage_right_sidebar_widgets', array(
+				wbcr_factory_404_apply_filters_deprecated('wbcr_factory_pages_405_imppage_right_sidebar_widgets', array(
 					array(
 						'info_widget' => $this->getInfoWidget(),
 						'rating_widget' => $this->getRatingWidget(),
 						'donate_widget' => $this->getDonateWidget()
 					),
 					$this->getResultId()
-				), '4.0.1', 'wbcr_factory_pages_402_imppage_get_widgets');
+				), '4.0.1', 'wbcr_factory_pages_405_imppage_get_widgets');
 
-				wbcr_factory_401_apply_filters_deprecated('wbcr_factory_pages_402_imppage_bottom_sidebar_widgets', array(
+				wbcr_factory_404_apply_filters_deprecated('wbcr_factory_pages_405_imppage_bottom_sidebar_widgets', array(
 					array(
 						'info_widget' => $this->getInfoWidget(),
 						'rating_widget' => $this->getRatingWidget(),
 						'donate_widget' => $this->getDonateWidget()
 					),
 					$this->getResultId()
-				), '4.0.1', 'wbcr_factory_pages_402_imppage_get_widgets');
+				), '4.0.1', 'wbcr_factory_pages_405_imppage_get_widgets');
 
-				return apply_filters('wbcr_factory_pages_402_imppage_get_widgets', array(
+				return apply_filters('wbcr_factory_pages_405_imppage_get_widgets', array(
 					'info_widget' => $this->getInfoWidget(),
 					'rating_widget' => $this->getRatingWidget(),
 					'donate_widget' => $this->getDonateWidget()
@@ -593,12 +602,12 @@
 				
 				global $factory_impressive_page_menu;
 
-				$form = new Wbcr_FactoryForms402_Form(array(
+				$form = new Wbcr_FactoryForms405_Form(array(
 					'scope' => rtrim($this->plugin->getPrefix(), '_'),
 					'name' => $this->getResultId() . "-options"
 				), $this->plugin);
 				
-				$form->setProvider(new Wbcr_FactoryForms402_OptionsValueProvider($this->plugin));
+				$form->setProvider(new Wbcr_FactoryForms405_OptionsValueProvider($this->plugin));
 				
 				$options = $this->getOptions();
 				
@@ -643,27 +652,27 @@
 					check_admin_referer('wbcr_factory_' . $this->getResultId() . '_save_action');
 
 					if( !current_user_can('administrator') && !current_user_can($this->capabilitiy) ) {
-						wp_die(__('You do not have permission to edit page.', 'wbcr_factory_pages_402'));
+						wp_die(__('You do not have permission to edit page.', 'wbcr_factory_pages_405'));
 						exit;
 					}
 
-					wbcr_factory_401_do_action_deprecated('wbcr_factory_401_imppage_before_save', array(
+					wbcr_factory_404_do_action_deprecated('wbcr_factory_404_imppage_before_save', array(
 						$form,
 						$this->plugin->getPluginName()
-					), '4.0.1', 'wbcr_factory_401_imppage_before_form_save');
+					), '4.0.1', 'wbcr_factory_404_imppage_before_form_save');
 
-					do_action('wbcr_factory_401_imppage_before_form_save', $form, $this->plugin, $this);
+					do_action('wbcr_factory_404_imppage_before_form_save', $form, $this->plugin, $this);
 
 					$this->beforeFormSave();
 					
 					$form->save();
 
-					wbcr_factory_401_do_action_deprecated('wbcr_factory_401_imppage_saved', array(
+					wbcr_factory_404_do_action_deprecated('wbcr_factory_404_imppage_saved', array(
 						$form,
 						$this->plugin->getPluginName()
-					), '4.0.1', 'wbcr_factory_401_imppage_form_saved');
+					), '4.0.1', 'wbcr_factory_404_imppage_form_saved');
 					
-					do_action('wbcr_factory_401_imppage_form_saved', $form, $this->plugin, $this);
+					do_action('wbcr_factory_404_imppage_form_saved', $form, $this->plugin, $this);
 
 					$this->formSaved();
 					
@@ -674,7 +683,7 @@
 				
 				?>
 				<div id="WBCR" class="wrap">
-					<div class="wbcr-factory-pages-402-impressive-page-template factory-bootstrap-401 factory-fontawesome-000">
+					<div class="wbcr-factory-pages-405-impressive-page-template factory-bootstrap-404 factory-fontawesome-000">
 						<div class="wbcr-factory-options wbcr-factory-options-<?= esc_attr($this->id) ?>">
 							<div class="wbcr-factory-left-navigation-bar">
 								<?php $this->showPageMenu() ?>
@@ -724,7 +733,7 @@
 				global $factory_impressive_page_menu;
 				?>
 				<div id="WBCR" class="wrap">
-					<div class="wbcr-factory-pages-402-impressive-page-template factory-bootstrap-401 factory-fontawesome-000">
+					<div class="wbcr-factory-pages-405-impressive-page-template factory-bootstrap-404 factory-fontawesome-000">
 						<div class="wbcr-factory-page wbcr-factory-page-<?= $this->id ?>">
 							<?php $this->showHeader(); ?>
 							
@@ -774,24 +783,24 @@
 						<span class="wbcr-factory-hint-icon-simple wbcr-factory-simple-red">
 							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAQAAABKmM6bAAAAUUlEQVQIHU3BsQ1AQABA0X/komIrnQHYwyhqQ1hBo9KZRKL9CBfeAwy2ri42JA4mPQ9rJ6OVt0BisFM3Po7qbEliru7m/FkY+TN64ZVxEzh4ndrMN7+Z+jXCAAAAAElFTkSuQmCC" alt=""/>
 						</span>
-							- <?php _e('A neutral setting that can not harm your site, but you must be sure that you need to use it.', 'wbcr_factory_pages_402'); ?>
+							- <?php _e('A neutral setting that can not harm your site, but you must be sure that you need to use it.', 'wbcr_factory_pages_405'); ?>
 						</li>
 						<li>
 						<span class="wbcr-factory-hint-icon-simple wbcr-factory-simple-grey">
 							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAQAAABKmM6bAAAAUUlEQVQIHU3BsQ1AQABA0X/komIrnQHYwyhqQ1hBo9KZRKL9CBfeAwy2ri42JA4mPQ9rJ6OVt0BisFM3Po7qbEliru7m/FkY+TN64ZVxEzh4ndrMN7+Z+jXCAAAAAElFTkSuQmCC" alt=""/>
 						</span>
-							- <?php _e('When set this option, you must be careful. Plugins and themes may depend on this function. You must be sure that you can disable this feature for the site.', 'wbcr_factory_pages_402'); ?>
+							- <?php _e('When set this option, you must be careful. Plugins and themes may depend on this function. You must be sure that you can disable this feature for the site.', 'wbcr_factory_pages_405'); ?>
 						</li>
 						<li>
 						<span class="wbcr-factory-hint-icon-simple wbcr-factory-simple-green">
 							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAQAAABKmM6bAAAAUUlEQVQIHU3BsQ1AQABA0X/komIrnQHYwyhqQ1hBo9KZRKL9CBfeAwy2ri42JA4mPQ9rJ6OVt0BisFM3Po7qbEliru7m/FkY+TN64ZVxEzh4ndrMN7+Z+jXCAAAAAElFTkSuQmCC" alt=""/>
 						</span>
-							- <?php _e('Absolutely safe setting, We recommend to use.', 'wbcr_factory_pages_402'); ?>
+							- <?php _e('Absolutely safe setting, We recommend to use.', 'wbcr_factory_pages_405'); ?>
 						</li>
 					</ul>
 					----------<br>
 					
-					<p><?php _e('Hover to the icon to get help for the feature you selected.', 'wbcr_factory_pages_402'); ?></p>
+					<p><?php _e('Hover to the icon to get help for the feature you selected.', 'wbcr_factory_pages_405'); ?></p>
 				</div>
 			<?php
 			}
@@ -804,22 +813,22 @@
 					$page_url = $args[0];
 				}
 				
-				$page_url = apply_filters('wbcr_factory_pages_402_imppage_rating_widget_url', $page_url, $this->plugin->getPluginName(), $this->getResultId());
+				$page_url = apply_filters('wbcr_factory_pages_405_imppage_rating_widget_url', $page_url, $this->plugin->getPluginName(), $this->getResultId());
 				
 				?>
 				<div class="wbcr-factory-sidebar-widget">
 					<p>
-						<strong><?php _e('Do you want the plugin to improved and update?', 'wbcr_factory_pages_402'); ?></strong>
+						<strong><?php _e('Do you want the plugin to improved and update?', 'wbcr_factory_pages_405'); ?></strong>
 					</p>
 					
-					<p><?php _e('Help the author, leave a review on wordpress.org. Thanks to feedback, I will know that the plugin is really useful to you and is needed.', 'wbcr_factory_pages_402'); ?></p>
+					<p><?php _e('Help the author, leave a review on wordpress.org. Thanks to feedback, I will know that the plugin is really useful to you and is needed.', 'wbcr_factory_pages_405'); ?></p>
 					
-					<p><?php _e('And also write your ideas on how to extend or improve the plugin.', 'wbcr_factory_pages_402'); ?></p>
+					<p><?php _e('And also write your ideas on how to extend or improve the plugin.', 'wbcr_factory_pages_405'); ?></p>
 					
 					<p>
 						<i class="wbcr-factory-icon-5stars"></i>
 						<a href="<?= $page_url ?>" title="Go rate us" target="_blank">
-							<strong><?php _e('Go rate us and push ideas', 'wbcr_factory_pages_402'); ?></strong>
+							<strong><?php _e('Go rate us and push ideas', 'wbcr_factory_pages_405'); ?></strong>
 						</a>
 					</p>
 				</div>
@@ -831,7 +840,7 @@
 				?>
 				<div class="wbcr-factory-sidebar-widget">
 					<p>
-						<strong><?php _e('Donation for plugin development', 'wbcr_factory_pages_402'); ?></strong>
+						<strong><?php _e('Donation for plugin development', 'wbcr_factory_pages_405'); ?></strong>
 					</p>
 					
 					<?php if( get_locale() !== 'ru_RU' ): ?>
@@ -840,7 +849,7 @@
 							<input type="hidden" name="hosted_button_id" value="VDX7JNTQPNPFW">
 							
 							<div class="wbcr-factory-donation-price">5$</div>
-							<input type="image" src="<?= FACTORY_PAGES_402_URL ?>/templates/assets/img/paypal-donate.png" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
+							<input type="image" src="<?= FACTORY_PAGES_405_URL ?>/templates/assets/img/paypal-donate.png" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
 						</form>
 					<?php else: ?>
 						<iframe frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/donate.xml?account=410011242846510&quickpay=donate&payment-type-choice=on&mobile-payment-type-choice=on&default-sum=300&targets=%D0%9D%D0%B0+%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83+%D0%BF%D0%BB%D0%B0%D0%B3%D0%B8%D0%BD%D0%B0+%D0%B8+%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D1%83+%D0%BD%D0%BE%D0%B2%D1%8B%D1%85+%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B9.+&target-visibility=on&project-name=Webcraftic&project-site=&button-text=05&comment=on&hint=%D0%9A%D0%B0%D0%BA%D1%83%D1%8E+%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8E+%D0%BD%D1%83%D0%B6%D0%BD%D0%BE+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C+%D0%B2+%D0%BF%D0%BB%D0%B0%D0%B3%D0%B8%D0%BD%3F&mail=on&successURL=" width="508" height="187"></iframe>
@@ -859,7 +868,7 @@
 			{
 				?>
 				<div id="WBCR" class="wrap">
-					<div class="wbcr-factory-pages-402-impressive-page-template factory-bootstrap-401 factory-fontawesome-000">
+					<div class="wbcr-factory-pages-405-impressive-page-template factory-bootstrap-404 factory-fontawesome-000">
 						<div id="wbcr-factory-confirm-dialog">
 							<h2><?php echo $data['title'] ?></h2>
 							

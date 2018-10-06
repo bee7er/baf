@@ -17,12 +17,12 @@
 	/**
 	 * Common Settings
 	 */
-	class WINP_SettingsPage extends Wbcr_FactoryPages402_AdminPage {
+	class WINP_SettingsPage extends Wbcr_FactoryPages405_AdminPage {
 
 		/**
-		 * @param Wbcr_Factory401_Plugin $plugin
+		 * @param Wbcr_Factory404_Plugin $plugin
 		 */
-		public function __construct(Wbcr_Factory401_Plugin $plugin)
+		public function __construct(Wbcr_Factory404_Plugin $plugin)
 		{
 			$this->menu_post_type = WINP_SNIPPETS_POST_TYPE;
 
@@ -173,12 +173,12 @@
 		{
 
 			// creating a form
-			$form = new Wbcr_FactoryForms402_Form(array(
+			$form = new Wbcr_FactoryForms405_Form(array(
 				'scope' => substr($this->plugin->getPrefix(), 0, -1),
 				'name' => 'setting'
 			), $this->plugin);
 
-			$form->setProvider(new Wbcr_FactoryForms402_OptionsValueProvider($this->plugin));
+			$form->setProvider(new Wbcr_FactoryForms405_OptionsValueProvider($this->plugin));
 
 			$form->add($this->getOptions());
 
@@ -191,7 +191,7 @@
 
 			?>
 			<div class="wrap ">
-				<div class="factory-bootstrap-401 factory-fontawesome-000">
+				<div class="factory-bootstrap-404 factory-fontawesome-000">
 					<h3><?php _e('Settings', 'insert-php') ?></h3>
 
 					<form method="post" class="form-horizontal">

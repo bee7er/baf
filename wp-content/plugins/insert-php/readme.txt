@@ -159,6 +159,14 @@ When the error is located, correct it and try again.
 5. Old way to use the plugin
 
 == Changelog ==
+
+= 2.0.6 =
+* Changed the way to safely save snippets. Now in case of an error, you will not lose the snippet changes. And also now there is no verification for snippets created for shortcodes, because of what many users had a problem with saving their old code.
+* You can get the values of the variables from the shortcode attributes. For example, if you set the my_type attribute for the shortcode [wbcr_php_snippet id="2864" my_type="button"], you can get the value of the my_type attribute in the snippet by calling $my_type var.
+* Added feature to set tags for snippets
+* Added an instruction on how to export and import your own snippets
+* Some bugs fixed.
+
 = 2.0.4 =
 * Fixed critical bug with $wp_query. It was a conflict with some plugins that overwritten the global variable $wp_query.
 * All created and updated snippets by default, are now active.

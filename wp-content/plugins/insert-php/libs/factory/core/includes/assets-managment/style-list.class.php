@@ -14,14 +14,14 @@
 		exit;
 	}
 
-	if( !class_exists('Wbcr_Factory401_StyleList') ) {
+	if( !class_exists('Wbcr_Factory404_StyleList') ) {
 
 		/**
 		 * Style List
 		 *
 		 * @since 1.0.0
 		 */
-		class Wbcr_Factory401_StyleList extends Wbcr_Factory401_AssetsList {
+		class Wbcr_Factory404_StyleList extends Wbcr_Factory404_AssetsList {
 
 			public function connect($source = 'wordpress')
 			{

@@ -1,6 +1,6 @@
 <?php
 	
-	class WINP_BaseOptionsMetaBox extends Wbcr_FactoryMetaboxes400_FormMetabox {
+	class WINP_BaseOptionsMetaBox extends Wbcr_FactoryMetaboxes403_FormMetabox {
 		
 		/**
 		 * A visible title of the metabox.
@@ -25,7 +25,7 @@
 		 */
 		public $priority = 'core';
 		
-		public $cssClass = 'factory-bootstrap-401 factory-fontawesome-000';
+		public $css_class = 'factory-bootstrap-404 factory-fontawesome-000';
 
 		protected $errors = array();
 		protected $source_channel;
@@ -50,8 +50,8 @@
 		 * Configures a metabox.
 		 *
 		 * @since 1.0.0
-		 * @param Factory401_ScriptList $scripts A set of scripts to include.
-		 * @param Factory401_StyleList $styles A set of style to include.
+		 * @param Factory404_ScriptList $scripts A set of scripts to include.
+		 * @param Factory404_StyleList $styles A set of style to include.
 		 * @return void
 		 */
 		public function configure($scripts, $styles)
@@ -160,10 +160,10 @@
 		/**
 		 * Configures a form that will be inside the metabox.
 		 *
-		 * @see Wbcr_FactoryMetaboxes400_FormMetabox
+		 * @see Wbcr_FactoryMetaboxes403_FormMetabox
 		 * @since 1.0.0
 		 *
-		 * @param FactoryForms402_Form $form A form object to configure.
+		 * @param FactoryForms405_Form $form A form object to configure.
 		 * @return void
 		 */
 		public function form($form)
@@ -172,7 +172,7 @@
 				'type' => 'textarea',
 				'name' => 'snippet_code',
 				'title' => __('Enter the code for your snippet', 'insert-php'),
-				'hint' => __('Enter the PHP code, without opening and closing tags.', 'insert-php'),
+				'hint' => __('Enter the PHP code, without opening and closing tags.<br>-If you want to put the html code in the snippet, put the closing php tag before the html code. Example: <b>?&gt;&lt;div&gt;my html code&lt;/div&gt;</b><br>-You can get the values of the variables from the shortcode attributes. For example, if you set the <b>my_type</b> attribute for the shortcode [wbcr_php_snippet id="2864" <b>my_type="button"</b>], you can get the value of the my_type attribute in the snippet by calling <b>$my_type</b> var.', 'insert-php'),
 				'filter_value' => array($this, 'codeSnippetFilterValue')
 			);
 
@@ -230,7 +230,7 @@
 
 			do_action('wbcr_inp_after_execute_snippet', $post->ID, $snippet_code, $result);
 
-			return false === $result;
+			return !(false === $result);
 		}
 
 		private function codeErrorCallback($out)
@@ -258,19 +258,7 @@
 		 */
 		public function codeSnippetFilterValue($value, $raw_value)
 		{
-			global $post;
-
-			$snippet_code = $this->prepareCode($raw_value);
-
-			$is_default_activate = WINP_Plugin::app()->getOption('activate_by_default', true);
-
-			if( !$this->validateCode($snippet_code) && $is_default_activate && current_user_can('manage_options') ) {
-				WINP_Helper::updateMetaOption($post->ID, 'snippet_activate', true);
-			} else {
-				WINP_Helper::updateMetaOption($post->ID, 'snippet_activate', false);
-			}
-
-			return $snippet_code;
+			return $this->prepareCode($raw_value);
 		}
 
 		/**
@@ -289,10 +277,45 @@
 			return $code;
 		}
 
-		public function onSavingForm($postId)
+		public function afterSavingForm($postId)
 		{
-			/*if( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
+			global $post;
+
+			if( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
 				return;
-			}*/
+			}
+
+			$is_default_activate = WINP_Plugin::app()->getOption('activate_by_default', true);
+
+			$snippet_code = isset($_POST[WINP_Plugin::app()->getPrefix() . 'snippet_code'])
+				? $this->prepareCode($_POST[WINP_Plugin::app()->getPrefix() . 'snippet_code'])
+				: '';
+
+			$snippet_type = isset($_POST[WINP_Plugin::app()->getPrefix() . 'snippet_scope'])
+				? sanitize_text_field($_POST[WINP_Plugin::app()->getPrefix() . 'snippet_scope'])
+				: null;
+
+			WINP_Helper::updateMetaOption($post->ID, 'snippet_activate', false);
+
+			$validate = true;
+
+			if( $snippet_type == 'evrywhere' ) {
+				$validate = $this->validateCode($snippet_code);
+			}
+
+			if( $validate && $is_default_activate && WINP_Plugin::app()->currentUserCan() ) {
+				WINP_Helper::updateMetaOption($post->ID, 'snippet_activate', true);
+			} else {
+
+				/* Display message if a parse error occurred */
+
+				wp_redirect(add_query_arg(array(
+					'action' => 'edit',
+					'post' => $post->ID,
+					'wbcr_inp_save_snippet_result' => 'code-error'
+				), admin_url('post.php')));
+
+				exit;
+			}
 		}
 	}

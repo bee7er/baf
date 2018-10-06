@@ -54,6 +54,31 @@
 			'text' => '<p>' . $upgrade_plugin_notice . '</p>'
 		);
 
+		/**
+		 * Show error notification after saving snippet. We can also show this message when the snippet is activated.
+		 * We must warn the user that we can not perform the spippet due to an error.
+		 */
+		if( isset($_GET['wbcr_inp_save_snippet_result']) && $_GET['wbcr_inp_save_snippet_result'] == 'code-error' ) {
+
+			$post_id = isset($_GET['post'])
+				? intval($_GET['post'])
+				: null;
+
+			if( $post_id && $error = WINP_Plugin::app()->getSnippetError($post_id) ) {
+
+				$error_message = sprintf('<p>%s</p><p><strong>%s</strong></p>', sprintf(__('The snippet has been deactivated due to an error on line %d:', 'insert-php'), $error['line']), $error['message']);
+
+				$notices[] = array(
+					'id' => 'inp_result_error',
+					'where' => array('post', 'post-new', 'edit'),
+					'type' => 'error',
+					'dismissible' => false,
+					'dismiss_expires' => 0,
+					'text' => $error_message
+				);
+			}
+		}
+
 		return $notices;
 	}
 
@@ -75,7 +100,10 @@
 		// Register metaboxes
 
 		require_once(WINP_PLUGIN_DIR . '/admin/metaboxes/base-options.php');
-		Wbcr_FactoryMetaboxes400::registerFor(new WINP_BaseOptionsMetaBox($plugin), WINP_SNIPPETS_POST_TYPE, $plugin);
+		Wbcr_FactoryMetaboxes403::registerFor(new WINP_BaseOptionsMetaBox($plugin), WINP_SNIPPETS_POST_TYPE, $plugin);
+
+		require_once(WINP_PLUGIN_DIR . '/admin/metaboxes/info.php');
+		Wbcr_FactoryMetaboxes403::registerFor(new WINP_InfoMetaBox($plugin), WINP_SNIPPETS_POST_TYPE, $plugin);
 
 		// Upgrade up to new version
 		if( !$plugin->getOption('upgrade_up_to_201', false) ) {

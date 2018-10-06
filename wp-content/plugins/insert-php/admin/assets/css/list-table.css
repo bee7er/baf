@@ -15,6 +15,9 @@
 .wp-list-table th#where_use {
   width: 200px !important;
 }
+.wp-list-table th#taxonomy-wbcr-snippet-tags {
+  width: 150px;
+}
 .wp-list-table td {
   vertical-align: middle !important;
 }

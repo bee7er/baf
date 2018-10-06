@@ -14,14 +14,14 @@
 		exit;
 	}
 
-	if( !class_exists('Wbcr_Factory401_ScriptList') ) {
+	if( !class_exists('Wbcr_Factory404_ScriptList') ) {
 
 		/**
 		 * Script List
 		 *
 		 * @since 1.0.0
 		 */
-		class Wbcr_Factory401_ScriptList extends Wbcr_Factory401_AssetsList {
+		class Wbcr_Factory404_ScriptList extends Wbcr_Factory404_AssetsList {
 
 			public $localize_data = array();
 			public $use_ajax = false;

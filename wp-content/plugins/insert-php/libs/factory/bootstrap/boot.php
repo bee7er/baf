@@ -19,19 +19,19 @@
 		return;
 	}
 
-	if( defined('FACTORY_BOOTSTRAP_401_LOADED') ) {
+	if( defined('FACTORY_BOOTSTRAP_404_LOADED') ) {
 		return;
 	}
-	define('FACTORY_BOOTSTRAP_401_LOADED', true);
+	define('FACTORY_BOOTSTRAP_404_LOADED', true);
 
-	define('FACTORY_BOOTSTRAP_401_DIR', dirname(__FILE__));
-	define('FACTORY_BOOTSTRAP_401_URL', plugins_url(null, __FILE__));
+	define('FACTORY_BOOTSTRAP_404_DIR', dirname(__FILE__));
+	define('FACTORY_BOOTSTRAP_404_URL', plugins_url(null, __FILE__));
 
 	// sets version of admin interface
-	define('FACTORY_BOOTSTRAP_401_VERSION', 'FACTORY_BOOTSTRAP_401');
+	define('FACTORY_BOOTSTRAP_404_VERSION', 'FACTORY_BOOTSTRAP_404');
 
 	if( !defined('FACTORY_FLAT_ADMIN') ) {
 		define('FACTORY_FLAT_ADMIN', true);
 	}
 
-	include_once(FACTORY_BOOTSTRAP_401_DIR . '/includes/functions.php');
+	include_once(FACTORY_BOOTSTRAP_404_DIR . '/includes/functions.php');

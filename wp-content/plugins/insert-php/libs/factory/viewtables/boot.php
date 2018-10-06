@@ -19,15 +19,15 @@
 		return;
 	}
 
-	if( defined('FACTORY_VIEWTABLES_401_LOADED') ) {
+	if( defined('FACTORY_VIEWTABLES_403_LOADED') ) {
 		return;
 	}
-	define('FACTORY_VIEWTABLES_401_LOADED', true);
+	define('FACTORY_VIEWTABLES_403_LOADED', true);
 
-	define('FACTORY_VIEWTABLES_401_DIR', dirname(__FILE__));
-	define('FACTORY_VIEWTABLES_401_URL', plugins_url(null, __FILE__));
+	define('FACTORY_VIEWTABLES_403_DIR', dirname(__FILE__));
+	define('FACTORY_VIEWTABLES_403_URL', plugins_url(null, __FILE__));
 
 	#comp merge
-	require(FACTORY_VIEWTABLES_401_DIR . '/viewtable.class.php');
-	require(FACTORY_VIEWTABLES_401_DIR . '/includes/viewtable-columns.class.php');
+	require(FACTORY_VIEWTABLES_403_DIR . '/viewtable.class.php');
+	require(FACTORY_VIEWTABLES_403_DIR . '/includes/viewtable-columns.class.php');
 	#endcomp

@@ -4,7 +4,7 @@
 	 * Plugin URI: https://wordpress.org/plugins/insert-php/
 	 * Description: Run PHP code inserted into WordPress posts and pages. An easy, clean and easy way to add code snippets to your site. You do not need to edit the functions.php file of your theme again!
 	 * Author: Will Bontrager Software, LLC <will@willmaster.com>, Webcraftic <wordpress.webraftic@gmail.com>
-	 * Version: 2.0.4
+	 * Version: 2.0.6
 	 * Text Domain: insert-php
 	 * Domain Path: /languages/
 	 * Author URI: http://www.willmaster.com/contact.php
@@ -34,6 +34,9 @@
 	// The type of posts used for snippets types
 	define('WINP_SNIPPETS_POST_TYPE', 'wbcr-snippets');
 
+	// The taxonomy used for snippets types
+	define('WINP_SNIPPETS_TAXONOMY', 'wbcr-snippet-tags');
+
 	
 
 	global $wp_version;
@@ -50,7 +53,7 @@
 			'prefix' => 'wbcr_inp_',
 			'plugin_name' => 'wbcr_insert_php',
 			'plugin_title' => __('PHP code snippets (Insert PHP)', 'insert-php'),
-			'plugin_version' => '2.0.4',
+			'plugin_version' => '2.0.6',
 			'required_php_version' => '5.2',
 			'required_wp_version' => '4.2',
 			'plugin_build' => 'free',

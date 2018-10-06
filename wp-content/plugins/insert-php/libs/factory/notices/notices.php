@@ -19,12 +19,12 @@
 	 *
 	 * @since 1.0.0
 	 */
-	if( !class_exists('Wbcr_FactoryNotices401') ) {
+	if( !class_exists('Wbcr_FactoryNotices403') ) {
 
-		class Wbcr_FactoryNotices401 {
+		class Wbcr_FactoryNotices403 {
 
 			/**
-			 * @var Wbcr_Factory401_Plugin
+			 * @var Wbcr_Factory404_Plugin
 			 */
 			protected $plugin;
 			/**
@@ -47,13 +47,13 @@
 			 */
 			public function __construct()
 			{
-				add_action('wbcr_factory_notices_401_plugin_created', array($this, 'init'));
+				add_action('wbcr_factory_notices_403_plugin_created', array($this, 'init'));
 			}
 
 			/**
-			 * @param Wbcr_Factory401_Plugin $plugin
+			 * @param Wbcr_Factory404_Plugin $plugin
 			 */
-			public function init(Wbcr_Factory401_Plugin $plugin)
+			public function init(Wbcr_Factory404_Plugin $plugin)
 			{
 				//default notices
 				//---
@@ -287,5 +287,5 @@
 			}
 		}
 
-		new Wbcr_FactoryNotices401();
+		new Wbcr_FactoryNotices403();
 	}

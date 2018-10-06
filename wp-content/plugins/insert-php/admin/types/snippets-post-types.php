@@ -5,7 +5,7 @@
 	 * Declaration for custom post type of Php code snippets
 	 * @link http://codex.wordpress.org/Post_Types
 	 */
-	class WSC_TasksItemType extends Wbcr_FactoryTypes401_Type {
+	class WSC_TasksItemType extends Wbcr_FactoryTypes404_Type {
 
 		/**
 		 * Custom post name.
@@ -28,9 +28,9 @@
 		public $capabilities = array('administrator');
 
 		/**
-		 * @param Wbcr_Factory401_Plugin $plugin
+		 * @param Wbcr_Factory404_Plugin $plugin
 		 */
-		function __construct(Wbcr_Factory401_Plugin $plugin)
+		function __construct(Wbcr_Factory404_Plugin $plugin)
 		{
 			$this->name = WINP_SNIPPETS_POST_TYPE;
 			$this->plural_title = __('PHP snippets', 'insert-php');

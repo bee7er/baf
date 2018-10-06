@@ -14,15 +14,14 @@
 		exit;
 	}
 
-	if( !class_exists('Wbcr_FactoryMetaboxes400_FormMetabox') ) {
+	if( !class_exists('Wbcr_FactoryMetaboxes403_FormMetabox') ) {
 
 		/**
 		 * A class extending FactoryMetaboxes_Metabox and adding ability to create and save forms.
 		 *
 		 * @since 1.0.0
 		 */
-		abstract class Wbcr_FactoryMetaboxes400_FormMetabox extends Wbcr_FactoryMetaboxes400_Metabox {
-
+		abstract class Wbcr_FactoryMetaboxes403_FormMetabox extends Wbcr_FactoryMetaboxes403_Metabox {
 
 			/**
 			 * CSS class that addes to the form.
@@ -33,7 +32,7 @@
 			public $css_class;
 
 			/**
-			 * @var Wbcr_FactoryForms402_MetaValueProvider
+			 * @var Wbcr_FactoryForms405_MetaValueProvider
 			 */
 			protected $provider;
 
@@ -43,9 +42,9 @@
 			private $scope;
 
 			/**
-			 * @param Wbcr_Factory401_Plugin $plugin
+			 * @param Wbcr_Factory404_Plugin $plugin
 			 */
-			public function __construct(Wbcr_Factory401_Plugin $plugin)
+			public function __construct(Wbcr_Factory404_Plugin $plugin)
 			{
 				parent::__construct($plugin);
 
@@ -54,19 +53,19 @@
 
 			/**
 			 * @param null $post_id
-			 * @return Wbcr_FactoryForms402_Form
+			 * @return Wbcr_FactoryForms405_Form
 			 */
 			private function getForm($post_id = null)
 			{
 				// creating a value provider
-				$this->provider = new Wbcr_FactoryForms402_MetaValueProvider(array(
+				$this->provider = new Wbcr_FactoryForms405_MetaValueProvider(array(
 					'scope' => $this->scope
 				));
 
 				$this->provider->init($post_id);
 
 				// creating a form
-				$form = new Wbcr_FactoryForms402_Form(array(
+				$form = new Wbcr_FactoryForms405_Form(array(
 					'scope' => $this->scope,
 					'name' => $this->id
 				), $this->plugin);
@@ -86,7 +85,7 @@
 
 				$form = $this->getForm();
 
-				echo '<div class="factory-form-metabox factory-bootstrap-401">';
+				echo '<div class="factory-form-metabox factory-bootstrap-404">';
 				$this->beforeForm($form);
 				$form->html(array(
 					'css_class' => $this->css_class
@@ -98,15 +97,26 @@
 			public function save($post_id)
 			{
 				$form = $this->getForm($post_id);
+
 				$this->onSavingForm($post_id);
 
 				$form->save();
+
+				$this->afterSavingForm($post_id);
 			}
 
 			/**
 			 * Extra custom actions after the form is saved.
 			 */
 			public function onSavingForm($post_id)
+			{
+				return;
+			}
+
+			/**
+			 * Extra custom actions after the form is saved.
+			 */
+			public function afterSavingForm($post_id)
 			{
 				return;
 			}
@@ -119,7 +129,7 @@
 			/**
 			 * Method executed before rendering the form.
 			 */
-			public function beforeForm(Wbcr_FactoryForms402_Form $form)
+			public function beforeForm(Wbcr_FactoryForms405_Form $form)
 			{
 				return;
 			}
@@ -127,7 +137,7 @@
 			/**
 			 * Method executed after rendering the form.
 			 */
-			public function afterForm(Wbcr_FactoryForms402_Form $form)
+			public function afterForm(Wbcr_FactoryForms405_Form $form)
 			{
 				return;
 			}

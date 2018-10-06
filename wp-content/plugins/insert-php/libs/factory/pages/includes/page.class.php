@@ -14,9 +14,9 @@
 		exit;
 	}
 
-	if( !class_exists('Wbcr_FactoryPages402_Page') ) {
+	if( !class_exists('Wbcr_FactoryPages405_Page') ) {
 
-		class Wbcr_FactoryPages402_Page {
+		class Wbcr_FactoryPages405_Page {
 
 			/**
 			 * Page id used to call.
@@ -26,7 +26,7 @@
 
 			/**
 			 * Current Factory Plugin.
-			 * @var Wbcr_Factory401_Plugin
+			 * @var Wbcr_Factory404_Plugin
 			 */
 			public $plugin;
 
@@ -37,10 +37,10 @@
 
 
 			/**
-			 * @param Wbcr_Factory401_Plugin $plugin
+			 * @param Wbcr_Factory404_Plugin $plugin
 			 * @throws Exception
 			 */
-			public function __construct(Wbcr_Factory401_Plugin $plugin)
+			public function __construct(Wbcr_Factory404_Plugin $plugin)
 			{
 				$this->plugin = $plugin;
 

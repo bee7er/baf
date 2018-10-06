@@ -10,31 +10,31 @@
 	 * @since 1.0.0
 	 */
 	
-	add_action('wbcr_factory_bootstrap_401_plugin_created', 'wbcr_factory_bootstrap_401_plugin_created');
+	add_action('wbcr_factory_bootstrap_404_plugin_created', 'wbcr_factory_bootstrap_404_plugin_created');
 	
 	/**
-	 * @param Wbcr_Factory401_Plugin $plugin
+	 * @param Wbcr_Factory404_Plugin $plugin
 	 */
-	function wbcr_factory_bootstrap_401_plugin_created($plugin)
+	function wbcr_factory_bootstrap_404_plugin_created($plugin)
 	{
-		$manager = new Wbcr_FactoryBootstrap401_Manager($plugin);
+		$manager = new Wbcr_FactoryBootstrap404_Manager($plugin);
 		$plugin->setBootstap($manager);
 	}
 	
-	if( !class_exists('Wbcr_FactoryBootstrap401_Manager') ) {
+	if( !class_exists('Wbcr_FactoryBootstrap404_Manager') ) {
 		
 		/**
 		 * The Bootstrap Manager class.
 		 *
 		 * @since 3.2.0
 		 */
-		class Wbcr_FactoryBootstrap401_Manager {
+		class Wbcr_FactoryBootstrap404_Manager {
 			
 			/**
 			 * A plugin for which the manager was created.
 			 *
 			 * @since 3.2.0
-			 * @var Wbcr_Factory401_Plugin
+			 * @var Wbcr_Factory404_Plugin
 			 */
 			public $plugin;
 			
@@ -59,7 +59,7 @@
 			 *
 			 * @since 1.0.0
 			 */
-			public function __construct(Wbcr_Factory401_Plugin $plugin)
+			public function __construct(Wbcr_Factory404_Plugin $plugin)
 			{
 				$this->plugin = $plugin;
 				
@@ -120,8 +120,8 @@
 			public function loadAssets($hook)
 			{
 				
-				do_action('wbcr_factory_401_bootstrap_enqueue_scripts', $hook);
-				do_action('wbcr_factory_401_bootstrap_enqueue_scripts_' . $this->plugin->getPluginName(), $hook);
+				do_action('wbcr_factory_404_bootstrap_enqueue_scripts', $hook);
+				do_action('wbcr_factory_404_bootstrap_enqueue_scripts_' . $this->plugin->getPluginName(), $hook);
 
 				$dependencies = array();
 				if( !empty($this->scripts) ) {
@@ -151,8 +151,8 @@
 				$color_name = get_user_meta($user_id, 'admin_color', true);
 				
 				if( $color_name !== 'fresh' ) {
-					if( file_exists(FACTORY_BOOTSTRAP_401_DIR . '/assets/flat/css/bootstrap.' . $color_name . '.css') ) {
-						wp_enqueue_style('wbcr-factory-bootstrap-401-colors', FACTORY_BOOTSTRAP_401_URL . '/assets/flat/css/bootstrap.' . $color_name . '.css');
+					if( file_exists(FACTORY_BOOTSTRAP_404_DIR . '/assets/flat/css/bootstrap.' . $color_name . '.css') ) {
+						wp_enqueue_style('wbcr-factory-bootstrap-404-colors', FACTORY_BOOTSTRAP_404_URL . '/assets/flat/css/bootstrap.' . $color_name . '.css');
 					}
 				}
 				
@@ -188,10 +188,10 @@
 					if( !window.factory ) {
 						window.factory = {};
 					}
-					if( !window.factory.factoryBootstrap401 ) {
-						window.factory.factoryBootstrap401 = {};
+					if( !window.factory.factoryBootstrap404 ) {
+						window.factory.factoryBootstrap404 = {};
 					}
-					window.factory.factoryBootstrap401.colors = {
+					window.factory.factoryBootstrap404.colors = {
 						primaryDark: '<?php echo $primary_dark ?>',
 						primaryLight: '<?php echo $primary_light ?>'
 					};
@@ -209,8 +209,8 @@
 
 				$is_first = true;
 				$cache_id = md5(implode(',', $this->scripts) . $type . $this->plugin->getPluginVersion());
-				$cache_dir_path = FACTORY_BOOTSTRAP_401_DIR . '/assets/cache/';
-				$cache_dir_url = FACTORY_BOOTSTRAP_401_URL . '/assets/cache/';
+				$cache_dir_path = FACTORY_BOOTSTRAP_404_DIR . '/assets/cache/';
+				$cache_dir_url = FACTORY_BOOTSTRAP_404_URL . '/assets/cache/';
 
 				$cache_filepath = $cache_dir_path . $cache_id . ".min." . $type;
 				$cache_fileurl = $cache_dir_url . $cache_id . ".min." . $type;
@@ -237,7 +237,7 @@
 					foreach($sripts as $script_to_load) {
 						$script_to_load = sanitize_text_field($script_to_load);
 						if( $cache_dir_exists ) {
-							$fname = FACTORY_BOOTSTRAP_401_DIR . "/assets/$type-min/$script_to_load.min." . $type;
+							$fname = FACTORY_BOOTSTRAP_404_DIR . "/assets/$type-min/$script_to_load.min." . $type;
 							if( file_exists($fname) ) {
 								$f = @fopen($fname, 'r');
 								$concat_files[] = @fread($f, filesize($fname));
@@ -245,11 +245,11 @@
 							}
 						} else {
 							if( $type == 'js' ) {
-								wp_enqueue_script(md5($script_to_load), FACTORY_BOOTSTRAP_401_URL . "/assets/$type-min/$script_to_load.min." . $type, $is_first
+								wp_enqueue_script(md5($script_to_load), FACTORY_BOOTSTRAP_404_URL . "/assets/$type-min/$script_to_load.min." . $type, $is_first
 									? $dependencies
 									: false, $this->plugin->getPluginVersion());
 							} else {
-								wp_enqueue_style(md5($script_to_load), FACTORY_BOOTSTRAP_401_URL . "/assets/$type-min/$script_to_load.min." . $type, array(), $this->plugin->getPluginVersion());
+								wp_enqueue_style(md5($script_to_load), FACTORY_BOOTSTRAP_404_URL . "/assets/$type-min/$script_to_load.min." . $type, array(), $this->plugin->getPluginVersion());
 							}
 							$is_first = false;
 						}

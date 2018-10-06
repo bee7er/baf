@@ -4,8 +4,8 @@
 		exit;
 	}
 
-	if( !class_exists('Wbcr_Factory401_Request') ) {
-		class Wbcr_Factory401_Request {
+	if( !class_exists('Wbcr_Factory404_Request') ) {
+		class Wbcr_Factory404_Request {
 
 			/**
 			 * @param null $param

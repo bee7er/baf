@@ -15,9 +15,9 @@
 		exit;
 	}
 
-	if( !class_exists('Wbcr_FactoryForms402_PatternControl') ) {
+	if( !class_exists('Wbcr_FactoryForms405_PatternControl') ) {
 
-		class Wbcr_FactoryForms402_PatternControl extends Wbcr_FactoryForms402_Control {
+		class Wbcr_FactoryForms405_PatternControl extends Wbcr_FactoryForms405_Control {
 
 			public $type = 'pattern';
 
@@ -52,12 +52,12 @@
 				$name = $this->getOption('name');
 
 				// filters to get available patterns for the given background contols
-				$this->patterns = apply_filters('wbcr_factory_forms_402_patterns', array());
-				$this->patterns = apply_filters('wbcr_factory_forms_402_patterns-' . $name, $this->patterns);
+				$this->patterns = apply_filters('wbcr_factory_forms_405_patterns', array());
+				$this->patterns = apply_filters('wbcr_factory_forms_405_patterns-' . $name, $this->patterns);
 
 				$this->custom_patterns = $this->getOption('patterns', array());
 
-				$this->color = new Wbcr_FactoryForms402_ColorControl($options['color'], $form, $provider);
+				$this->color = new Wbcr_FactoryForms405_ColorControl($options['color'], $form, $provider);
 			}
 
 			/**
@@ -102,19 +102,19 @@
 						</div>
 						<a href="#" class="button button-default factory-button factory-change-color-btn <?php if( $hasColor ) {
 							echo 'button-active';
-						} ?>" title="<?php _e('Change color', 'wbcr_factory_forms_402') ?>">
+						} ?>" title="<?php _e('Change color', 'wbcr_factory_forms_405') ?>">
 							<i class="fa fa-flask"></i>
-							<span><?php _e('re-color', 'wbcr_factory_forms_402') ?></span>
+							<span><?php _e('re-color', 'wbcr_factory_forms_405') ?></span>
 						</a>
 						<input type="hidden" id="<?php echo $name[0]; ?>" name="<?php echo $name[0]; ?>" value="<?php echo esc_url($values['url']); ?>" class="factory-pattern-result">
 						<input type="hidden" id="<?php echo $name[1]; ?>" name="<?php echo $name[1]; ?>" value="<?php echo esc_attr($values['color']); ?>" class="factory-color-result">
 					</div>
 					<div class="factory-color-panel">
 						<div class="factory-color-wrap">
-							<span class="factory-color-label"><?php _e('Select color:', 'wbcr_factory_forms_402') ?></span>
+							<span class="factory-color-label"><?php _e('Select color:', 'wbcr_factory_forms_405') ?></span>
 							<?php $this->color->html() ?>
 							<div class="factory-hint">
-								<i><?php _e('Changing the color may takes a minute or more. Please be patient.', 'wbcr_factory_forms_402') ?></i>
+								<i><?php _e('Changing the color may takes a minute or more. Please be patient.', 'wbcr_factory_forms_405') ?></i>
 							</div>
 						</div>
 						<div class="factory-picker-target"></div>

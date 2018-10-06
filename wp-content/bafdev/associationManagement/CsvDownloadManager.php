@@ -11,7 +11,7 @@ class CsvDownloadManager
      * @param $data
      * @return array
      */
-    public function getValidationErrors($data, $requiredFields = [])
+    public static function getValidationErrors($data, $requiredFields = [])
     {
         $requiredFields = ['society-name'];
 
