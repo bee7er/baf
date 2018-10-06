@@ -190,7 +190,7 @@ class SiteApplication
         $html .= '<tr><td>Home telephone number*</td><td>' . PageUtils::number('home_phone', $postData['home_phone']) . '</td></tr>';
         $html .= '<tr><td>Work number</td><td>' . PageUtils::number('work_phone', $postData['work_phone']) . '</td></tr>';
         $html .= '<tr><td>Mobile number</td><td>' . PageUtils::number('mobile', $postData['mobile']) . '</td></tr>';
-        $html .= '<tr><td>Email address</td><td>' . PageUtils::text('email', $postData['email']) . '</td></tr>';
+        $html .= '<tr><td>Email address*</td><td>' . PageUtils::text('email', $postData['email']) . '</td></tr>';
         $html .= '<tr><td colspan="2"><h4><strong>You can apply for a plot on up to 3 sites in Barnet.</strong></h4><h4>Please indicate your choices below:</h4></td></tr>';
 
         $html .= '<tr><td>Preferred allotment (please select one)</td><td>' . PageUtils::getAllotmentSelect($allotments, 'preferred_allotment', $postData['preferred_allotment']) . '</td></tr>';
